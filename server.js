@@ -1,19 +1,23 @@
-const PORT = process.env.PORT || 3001
-const app = express()
+const mysql = require('mysql2')
+const consoleTable = require('console.table')
+const inquirer = require('inquirer')
+const { connected } = require('node:process')
+var action = ""
 
-const apiRoutes = require('./routes/apiRoutes')
-// Express Middleware
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
-
-app.use('/api', apiRoutes)
-
-app.use((req, res) => {
-    res.status(404).end();
+const connection = mysql.createConnection({
+    host: 'localhost',
+    port: '3306',
+    user: 'daxburatto@gmail.com',
+    password: 'NoSmoking97!',
+    database: 'company'
 })
 
-db.on('open', () => {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`)
-    })
+connection.connect(err => {
+    if (err) throw err
+    console.log('connected as id ' + connection.threadId)
+    connected()
 })
+
+connected = () => {
+    promptUser()
+}
