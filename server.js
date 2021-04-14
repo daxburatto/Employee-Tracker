@@ -1,8 +1,6 @@
 const mysql = require('mysql2')
 const consoleTable = require('console.table')
 const inquirer = require('inquirer')
-const { connected } = require('node:process')
-var action = ""
 
 const connection = mysql.createConnection({
     host: 'localhost',
