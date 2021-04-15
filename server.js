@@ -19,3 +19,31 @@ connection.connect(err => {
 connected = () => {
     promptUser()
 }
+
+promptUser = async() => {
+    action = ''
+    await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'action',
+            message: 'Welcome to Employee Tracker, select an option to continue.',
+            choices: ["View Departments", "View Roles", "View All Employees"]
+        }
+    ])
+    .then(function(data){
+        switch (data.action) {
+            case "View Departments":
+                action: 'view'
+                viewDepartments();
+            break
+            case "View Roles":
+                action: 'view'
+                viewRoles()
+            break
+            case "View All Employees":
+                action: 'view'
+                viewEmployees()
+            break
+        }
+    })
+}
