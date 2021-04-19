@@ -1,5 +1,5 @@
 const mysql = require('mysql2')
-const consoleTable = require('console.table')
+const cTable = require('console.table')
 const inquirer = require('inquirer')
 
 const connection = mysql.createConnection({
@@ -44,6 +44,39 @@ promptUser = async() => {
                 action: 'view'
                 viewEmployees()
             break
+        }
+    })
+}
+
+continuePrompt = async () => {
+    setTimeout(async function(){
+        await inquirer.prompt([
+            {
+                type: 'confirm',
+                name: 'continue',
+                message: 'Do you have any other commands?'
+            }
+        ])
+        .then(function (data) {  
+            if (data.continue) {
+                promptUser()
+            } else {
+                connection.end()
+            }
+        })
+    }, 1000)
+}
+
+viewDepartments = async () => {
+    connection.query('SELECT * FROM departments ORDER BY department_name', function(err,res){
+        if (err) throw err
+        var table = cTable.getTable(res)
+        console.log(table)
+    })
+
+    setTimeout(async function(){
+        if(action === 'view') {
+            continuePrompt()
         }
     })
 }
