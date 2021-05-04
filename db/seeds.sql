@@ -1,11 +1,10 @@
 INSERT INTO departments(department_name)
 VALUES
-    ('Sales')
-    ('Engineering')
-    ('Legal')
-    ('Finance')
-    ('Executive')
-;
+    ('Sales'),
+    ('Engineering'),
+    ('Legal'),
+    ('Finance'),
+    ('Executive');
 INSERT INTO roles(titles,salary,department_id)
 VALUES
     ('Sales Lead', 100000, 1),
@@ -16,9 +15,8 @@ VALUES
     ('Legal Team Lead', 100000, 3),
     ('Lawyer', 250000, 3),
     ('Finance Lead', 75000, 4),
-    ('Finance Associate' 50000, 4),
-    ('CEO', 1000000, 5)
-;
+    ('Finance Associate', 50000, 4),
+    ('CEO', 1000000, 5);
 INSERT INTO employees(first_name,last_name,role_id,manager_id)
 VALUES
     ("Henry", "Bill", 1, NULL),
@@ -27,6 +25,5 @@ VALUES
     ("Test", "Employee", 3, NULL)
     ("Donny", "Bratton", 4, 1),
     ("Mirage", "Apex", 4, NULL),
-    ("Dax", "Buratto", 4, NULL)
-    ("Adelina", "Ruiz", 5, 11)
-;
+    ("Dax", "Buratto", 4, NULL),
+    ("Adelina", "Ruiz", 5, 11);

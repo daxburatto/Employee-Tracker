@@ -79,4 +79,22 @@ viewDepartments = async () => {
             continuePrompt()
         }
     })
+    promptTimeout(async function(){
+        if (action === 'add') {
+            await inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: "Enter Department name"
+                }
+            ]).then(function(data){
+                connection.query("INSERT INTO departments (department_name) VALUES ('" + data.name + "')", function(err, res){
+                    if (err) throw err
+                    console.log('Department added')
+                    var table = cTable.getTable(res)
+                    console.log(table)
+                })
+            })
+        }
+    }, 1000)
 }
