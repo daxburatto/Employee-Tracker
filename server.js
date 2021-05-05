@@ -220,5 +220,58 @@ viewEmployees = async () => {
             continuePrompt()
         }
     }, 999)
-    
+    setTimeout(async function () {  
+        if (action === 'update') {
+            await inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: 'Enter Employee ID number to update'
+                },
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: 'Select updated role of employee',
+                    choices: ['Salesman', 'Engineer', 'Lawyer', 'Financier', 'CEO']
+                }
+            ]).then(function (data) {  
+                var roleId = ''
+                switch (data.role) {
+                    case "Salesman":
+                        roleId = 1
+                        break;
+                    case "Engineer":
+                        roleId = 2
+                        break;
+                    case 'Lawyer':
+                        roleId = 3
+                        break
+                    case "Financier":
+                        roleId = 4
+                        break
+                    case "CEO":
+                        roleId = 5
+                        break;
+                }
+                connection.query('UPDATE employees SET ?, ? WHERE ?',
+                [
+                    {
+                        role_id: roleId
+                    },
+                    {
+                        manager_id: managerId
+                    },
+                    {
+                        id: data.id
+                    }
+                ], function (err, res) {  
+                    if (err) throw err
+                    console.log('Employee role updated')
+                    var table = cTable.getTable(res)
+                    console.log(table)
+                })
+            })
+            continuePrompt()
+        }
+    }, 999)
 }
