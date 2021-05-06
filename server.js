@@ -100,7 +100,7 @@ viewDepartments = async () => {
 }
 
 viewRoles = async () => {
-    connection.query('SELECT roles.id, title, salary, departments.department_name AS DEPARTMENT FROM ROLES LEFT JOIN departments ON roles.department_id ORDER BY salary DESC', function (err, res) {  
+    connection.query('SELECT roles.id, title, salary, departments.department_name AS department FROM roles LEFT JOIN departments ON roles.department_id ORDER BY salary DESC', function (err, res) {  
         if (err) throw err
         var table = cTable.getTable(res)
         console.log(table)
