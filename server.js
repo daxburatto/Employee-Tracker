@@ -20,7 +20,7 @@ connected = () => {
     promptUser()
 }
 
-promptUser = async() => {
+promptUser = async () => {
     action = ''
     await inquirer.prompt([
         {
@@ -35,15 +35,15 @@ promptUser = async() => {
             case "View Departments":
                 action: 'view'
                 viewDepartments();
-            break
+            break;
             case "View Roles":
                 action: 'view'
                 viewRoles()
-            break
+            break;
             case "View All Employees":
                 action: 'view'
                 viewEmployees()
-            break
+            break;
         }
     })
 }
@@ -95,8 +95,9 @@ viewDepartments = async () => {
                     console.log(table)
                 })
             })
+            continuePrompt()
         }
-    }, 999)
+    }, 1000)
 }
 
 viewRoles = async () => {
@@ -193,22 +194,28 @@ viewEmployees = async () => {
                 }
             ]).then(function (data) {  
                 var roleId = ''
+                var managerId = ''
                 switch (data.role) {
                     case "Salesman":
                         roleId = 1
+                        managerId = 1
                         break;
                     case "Engineer":
                         roleId = 2
+                        managerId = 2
                         break;
                     case 'Lawyer':
                         roleId = 3
-                        break
+                        managerId = 3
+                        break;
                     case "Financier":
                         roleId = 4
-                        break
+                        managerId = 4
+                        break;
                     case "CEO":
                         roleId = 5
-                        break
+                        managerId = 6
+                        break;
                 }
                 connection.query("INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('" + data.firstName + "', '" + data.lastName + "', '" + roleId + "', '" + managerId + "')", function (err, res) {  
                     if (err) throw err
@@ -236,21 +243,27 @@ viewEmployees = async () => {
                 }
             ]).then(function (data) {  
                 var roleId = ''
+                var managerId = ''
                 switch (data.role) {
                     case "Salesman":
                         roleId = 1
+                        managerId = 1
                         break;
                     case "Engineer":
                         roleId = 2
+                        managerId = 2
                         break;
                     case 'Lawyer':
                         roleId = 3
-                        break
+                        managerId = 3
+                        break;
                     case "Financier":
                         roleId = 4
-                        break
+                        managerId = 5
+                        break;
                     case "CEO":
                         roleId = 5
+                        managerId = 5
                         break;
                 }
                 connection.query('UPDATE employees SET ?, ? WHERE ?',
